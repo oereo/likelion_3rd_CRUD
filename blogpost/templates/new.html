@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action = "{% url 'create' %}">
+    <div class="form-group">
+        <label for="exampleFormControlInput1">제목 </label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name = "title">
+    </div>
+    <hr>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">내용</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name = "body"></textarea>
+    </div>
+    <input class="btn btn-info" type="submit" value="Submit">
+</form>
+{% endblock %}
