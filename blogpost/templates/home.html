@@ -12,6 +12,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{blog.title}}</h5>
                 {{blog.pub_date}}
+                <hr>
                 <p class="card-text">{{blog.summary}} ...</p>
                 <a href="{% url 'detail' blog.id %}" class="btn btn-info">블로그 게시글 보기</a>
             </div>
