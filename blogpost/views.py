@@ -39,4 +39,4 @@ def update(request, blog_id):
     blog.body = request.GET['body']
     blog.pub_date = timezone.datetime.now()
     blog.save() #쿼리셋 메소드
-    return redirect('/blog/'+str(blog.id))
+    return redirect('home')
