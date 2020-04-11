@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Blog
+from .models import Comment
 
 # Create your views here.
 
@@ -40,3 +41,15 @@ def update(request, blog_id):
     blog.pub_date = timezone.datetime.now()
     blog.save() #쿼리셋 메소드
     return redirect('home')
+
+
+    #Comment
+
+def makecomment(request, blog_id):
+    user = request.user
+    blog = get_object_or_404(Blog, pk = blog_id)
+    comment = Comment()
+    comment.text = request.POST.get('text','')
+    comment.created_date = timezone.datetime.now()
+    comment.save()
+    return redirect('detail')
