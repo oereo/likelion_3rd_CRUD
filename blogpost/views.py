@@ -59,6 +59,12 @@ def makecomment(request, blog_id):
     else :
         return redirect('home')
 
+
+def deletecomment(request, blog_id, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    comment.delete()
+    return redirect('detail', blog_id)
+
 # def makecomment(request, blog_id):
 #     blog = get_object_or_404(Blog, pk=blog_id)
 #     if request.method == "POST":
