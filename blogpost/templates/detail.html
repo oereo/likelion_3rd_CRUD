@@ -23,10 +23,14 @@
                 </p>
                 <div class="collapse" id="collapseExample">
                     <div class="card card-body">
-                        {% for comment in blogpost.comments.all %}
-                        {{comment.text}}
+                        {% for comment in details.comments.all %}
+                            {{comment.text}}
+                            <div style = "float : right;">{{comment.created_date}}</div>
+                            <hr>
                         {% endfor %}
-                        <form action="{% url 'makecomment' details.id %}">
+
+                        <form action="{% url 'makecomment' details.id %}" method = "POST">
+                            {% csrf_token %}
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">내용</label>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"

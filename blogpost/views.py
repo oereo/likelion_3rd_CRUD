@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Blog
 from .models import Comment
+#from .forms import CommentForm
 
 # Create your views here.
 
@@ -46,10 +47,27 @@ def update(request, blog_id):
     #Comment
 
 def makecomment(request, blog_id):
-    user = request.user
-    blog = get_object_or_404(Blog, pk = blog_id)
-    comment = Comment()
-    comment.text = request.POST.get('text','')
-    comment.created_date = timezone.datetime.now()
-    comment.save()
-    return redirect('detail')
+    if request.method == 'POST':
+        #comments = Comment.objects.filter(Entry=current_entry).order_by('created')
+        comment = Comment()
+        comment.text = request.POST['text']
+        comment.created_date = timezone.datetime.now()
+        comment.blog = Blog.objects.get(pk = blog_id)
+        comment.save()
+        return redirect('/blog/'+str(comment.blog.id))
+        #return render(request, 'detail.html', {'comment.blog' : comment.blog})
+    else :
+        return redirect('home')
+
+# def makecomment(request, blog_id):
+#     blog = get_object_or_404(Blog, pk=blog_id)
+#     if request.method == "POST":
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             comment = form.save(commit=False)
+#             comment.blog = blog
+#             comment.save()
+#             return redirect('detail', pk=blog_id)
+#     else:
+#         form = CommentForm()
+#     return render(request, 'detail.html', {'form': form, 'blog' : blog})
