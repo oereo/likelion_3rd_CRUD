@@ -46,7 +46,7 @@ def update(request, blog_id):
 
     #Comment
 
-def makecomment(request, blog_id):
+def make_comment(request, blog_id):
     if request.method == 'POST':
         #comments = Comment.objects.filter(Entry=current_entry).order_by('created')
         comment = Comment()
@@ -60,7 +60,7 @@ def makecomment(request, blog_id):
         return redirect('home')
 
 
-def deletecomment(request, blog_id, comment_id):
+def delete_comment(request, blog_id, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     comment.delete()
     return redirect('detail', blog_id)
